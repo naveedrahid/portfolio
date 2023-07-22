@@ -1,8 +1,10 @@
-// import mongoose from 'mongoose';
-// const { Schema } = mongoose;
+const mongoose = require('mongoose');
 
-// const productSchema = new mongoose.Schema({
-//     name: String,
-//     size: String
-// });
-// const Tank = mongoose.model('Tank', productSchema);
+const userSchema = new mongoose.Schema({
+    username: String,
+    email: String,
+    age: String
+});
+
+const userModel = mongoose.model('users', userSchema);
+module.exports = userModel;
