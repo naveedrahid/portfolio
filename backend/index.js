@@ -1,46 +1,30 @@
 const express = require('express');
-const mongoose = require('mongoose');
-require('dotenv').config();
+const path = require('path');
+const ejs = require('ejs');
+const connectDB = require('./server/db');
+const apiRoutes = require('./routes/apiRoutes');
+
 const app = express();
-const Users = require('./model/userModel');
+const port = process.env.PORT || 3000;
 
-// Middleware to parse incoming JSON data
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
+app.use('/admin', apiRoutes);
+const homeRoutes = require('./routes/home');
 
-mongoose.connect(process.env.MONGO_LOCAL_DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log('connected now');
-}).catch((err) => console.log('not connected'));
+app.use('/', homeRoutes);
 
-app.get('/', async (req, resp) => {
-    await resp.send('Your Localhost is running');
-});
-
-app.post('/users', async (req, res) => {
+const startApp = async () => {
     try {
-        const newUser = await Users.create({
-            username: req.body.username,
-            email: req.body.email,
-            age: req.body.age,
-        });
+        await connectDB();
 
-        res.json(newUser);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to create user' });
-    }
-});
-
-const localPort = process.env.PORT;
-const server = async () => {
-    try {
-        app.listen(localPort, () => {
-            console.log(`${localPort} is connected`);
+        app.listen(port, () => {
+            console.log(`Server started on port ${port}`);
         });
     } catch (error) {
-        console.log(error);
+        console.log('Error starting the app:', error);
     }
 };
 
-server();
+startApp();
