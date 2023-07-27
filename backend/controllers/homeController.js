@@ -1,3 +1,4 @@
+const { response } = require('express');
 const User = require('../models/user');
 
 const homePage = async (req, res) => {
@@ -44,10 +45,11 @@ const deleteUser = async (req, res) => {
     // Handle deleting a user
 };
 
+
 module.exports = {
     homePage,
     createUser,
     getUserById,
     updateUser,
-    deleteUser
+    deleteUser,
 }
