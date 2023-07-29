@@ -1,0 +1,67 @@
+<!-- Sidebar -->
+<%- include('../masterLayouts/sidebar.ejs') %>
+<!-- End of Sidebar -->
+
+<!-- Content Wrapper -->
+<!-- Main Content -->
+<!-- Topbar -->
+<%- include('../masterLayouts/header.ejs') %>
+<!-- End of Topbar -->
+<!-- Begin Page Content -->
+
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+  <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+        <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                <th>Title</th>
+                <th>Featured Image</th>
+                <th>Gallery</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Delete</th>
+                <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Title</td>
+                <td>Featured Image</td>
+                <td>Gallery</td>
+                <td>Description</td>
+                <td>
+                    Status
+                    <button type="submit" class="btn btn-success float-right">Active</button>
+                </td>
+                <td>
+                    Delete
+                    <a href="#" class="btn btn-danger btn-circle float-right">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+                <td>
+                    Edit
+                    <a href="#" class="btn btn-info btn-circle float-right">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- /.container-fluid -->
+<%- include('../masterLayouts/footer.ejs') %>
