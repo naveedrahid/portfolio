@@ -13,6 +13,13 @@
 
   <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+    <% for (const item of portfolioData) { %>
+        <li>
+          <h2><%= item.title %></h2>
+          <p><%= item.description %></p>
+          <img src="<%= basePath + item.featuredimage %>" alt="<%= item.title %>" width="200"> 
+        </li>
+      <% } %>
   <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">

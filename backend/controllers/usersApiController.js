@@ -10,7 +10,6 @@ const getUsers = (req, res) => {
             console.error('Users not founded', err);
             res.status(500).json({ error: 'Error getting users' });
         });
-
 }
 
 const createUser = (req, res) => {
@@ -41,9 +40,9 @@ const updateUser = (req, res) => {
                 return res.status(404).json({ error: 'User Not Found' });
             res.json(updateUsersAll);
         }
-    ).catch(err =>{
+    ).catch(err => {
         console.log('Error updating user:', err);
-        res.json(500).json({error:'Feild updating user:'});
+        res.json(500).json({ error: 'Feild updating user:' });
     })
 }
 

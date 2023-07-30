@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const userApiController = require('../controllers/usersApiController');
+const portfolioController = require('../controllers/api/portfolioController');
+const { uploadFeaturedImage } = require('../utils/multerConstant');
+const { createUser, getUsers, updateUser } = require('../controllers/usersApiController');
 
-router.get('/users', userApiController.getUsers);
-router.post('/users/create', userApiController.createUser);
-router.put('/users/:id', userApiController.updateUser);
+router.post('/portfolio/create', uploadFeaturedImage, portfolioController.portfolioCreate);
 
-// router.put('/users/:id', UserController.updateUser);
-// router.delete('/users/:id', UserController.deleteUser);
-
+// Users All Routes
+router.get('/users', getUsers);
+router.post('/users/create', createUser);
+router.put('/users/:id', updateUser);
 module.exports = router;
