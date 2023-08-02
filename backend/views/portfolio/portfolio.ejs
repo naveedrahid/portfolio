@@ -37,13 +37,13 @@
               <td><img src="<%= basePath + item.featuredimage %>" alt="<%= item.title %>" width="120"></td>
               <td><%= item.description %></td>
               <td class="text-center">
-                <button class="status-toggle" data-item-id="<%= item._id %>">
+                <button class="status-toggle <%= item.status === true ? 'btn btn-success' : 'btn btn-danger' %>" data-item-id="<%= item._id %>">
                   <% if (item.status === true) { %>
                     Active
                   <% } else { %>
                     deActive
                   <% } %>
-                </button>                
+                </button>
               </td>
               
               <td>

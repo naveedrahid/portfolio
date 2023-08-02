@@ -14,16 +14,17 @@ const portfolioView = (req, res) => {
 
 const portfolioUpdateStatus = async (req, res) => {
   const itemId = req.body.itemId;
-  console.log('Received itemId:', itemId);
-
   try {
-    const portfolioData = await Portfolio.findById(itemId);
-    console.log('Portfolio data:', portfolioData); // Check the value of portfolioData
-
-    // Rest of the code...
-  } catch (error) {
-    console.log('Error updating status:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    const portfolioItem = await Portfolio.findById(itemId);
+    if (!portfolioItem) {
+      return res.status(404).json({ message: 'Portfolio item not found' });
+    }
+    portfolioItem.status = !portfolioItem.status;
+    await portfolioItem.save();
+    return res.status(200).json({ status: portfolioItem.status });
+  } catch (err) {
+    console.error('Error updating status:', err);
+    return res.status(500).json({ message: 'Internal server error' });
   }
 };
 

@@ -3,8 +3,12 @@ const path = require('path');
 const connectDB = require('./server/db');
 const apiRoutes = require('./routes/apiRoutes');
 const sideBarMenu = require('./utils/menuConstant');
+const sweetalert2 = require('sweetalert2');
+const bodyParser = require('body-parser');
 
+// Parse JSON bodies for this app
 const app = express();
+app.use(bodyParser.json());
 const port = process.env.PORT || 3000;
 app.use(express.json());
 
