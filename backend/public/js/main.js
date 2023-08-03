@@ -15,18 +15,18 @@ $(document).ready(function () {
           contentType: 'application/json',
           data: JSON.stringify({ itemId })
         })
-        .done(function (data) {
-          button.text(data.status ? 'Active' : 'deActive');
-          button.removeClass('btn btn-success btn-danger');
-          if (data.status === true) {
-            button.addClass('btn btn-success');
-          } else {
-            button.addClass('btn btn-danger');
-          }
-        })
-        .fail(function (error) {
-          console.error('Error updating status:', error.responseJSON.message);
-        });
+          .done(function (data) {
+            button.text(data.status ? 'Active' : 'deActive');
+            button.removeClass('btn btn-success btn-danger');
+            if (data.status === true) {
+              button.addClass('btn btn-success');
+            } else {
+              button.addClass('btn btn-danger');
+            }
+          })
+          .fail(function (error) {
+            console.error('Error updating status:', error.responseJSON.message);
+          });
       } else if (result.isDenied) {
         Swal.fire('Status not update Successfully!', '', 'info');
       }

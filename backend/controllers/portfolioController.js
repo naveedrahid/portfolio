@@ -30,5 +30,5 @@ const portfolioUpdateStatus = async (req, res) => {
 
 module.exports = {
   portfolioView,
-  portfolioUpdateStatus,
+  portfolioUpdateStatus
 }

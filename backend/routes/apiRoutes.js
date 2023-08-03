@@ -1,12 +1,14 @@
 const express = require('express');
+const { portfolioCreate, fetchDataPortfolio, portfolioUpdate } = require('../controllers/api/portfolioController');
 const router = express.Router();
-const portfolioController = require('../controllers/api/portfolioController');
 const { uploadFeaturedImage } = require('../utils/multerConstant');
 const { createUser, getUsers, updateUser } = require('../controllers/usersApiController');
 
-router.post('/portfolio/create', uploadFeaturedImage, portfolioController.portfolioCreate);
+router.get('/portfolio', fetchDataPortfolio);
+router.post('/portfolio/create', uploadFeaturedImage, portfolioCreate);
+router.put('/portfolio/update/:id', uploadFeaturedImage, portfolioUpdate);
 
-// Users All Routes
+// Users All Routes 
 router.get('/users', getUsers);
 router.post('/users/create', createUser);
 router.put('/users/:id', updateUser);
