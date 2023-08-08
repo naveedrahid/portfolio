@@ -1,0 +1,16 @@
+#addPortfolioForm textarea {
+    width: 100%;
+    height: 150px;
+    resize: none;
+    color: #777;
+}
+
+#addPortfolioForm textarea, #addPortfolioForm input, #addPortfolioForm select {
+    border-radius: 5px;
+    text-indent: 10px;
+    border-color: #777;
+}
+h5#addPortfolioLabel {
+    float: left;
+    margin-bottom: 20px;
+}

@@ -7,4 +7,5 @@ router.get('/', homeController.homePage);
 router.get('/portfolio', portfolioController.index);
 router.post('/portfolio/update-status', portfolioController.portfolioUpdateStatus);
 router.post('/portfolio/create', portfolioController.create);
+// router.delete('/portfolio/delete', portfolioController.portfolioDelete);
 module.exports = router;

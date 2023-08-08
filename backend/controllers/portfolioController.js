@@ -22,7 +22,9 @@ const portfolioController = {
 
       const { add_title, add_desc, select_status } = req.body;
       const featuredimage = req.file ? req.file.filename : null;
-
+      if (!add_title || !add_desc ) {
+        return res.status(400).json({ error: 'Title and description are required fields' });
+      }
       try {
         const newPortfolio = new Portfolio({
           title: add_title,
@@ -57,4 +59,4 @@ const portfolioController = {
   },
 };
 
-module.exports = { portfolioController };
+module.exports = { portfolioController }; 

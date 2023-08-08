@@ -72,6 +72,12 @@ $(document).ready(function () {
   document.getElementById('addPortfolioForm').addEventListener('submit', (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
+    const add_title = formData.get('add_title');
+    const add_desc = formData.get('add_desc');
+    if (!add_title || !add_desc) {
+      alert('Please fill in all the required fields.');
+      return;
+    }
 
     fetch('/portfolio/create', {
       method: 'POST',
