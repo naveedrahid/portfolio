@@ -1,5 +1,5 @@
 const Portfolio = require("../../models/portfolio");
-const { removeOldImage } = require("../../utils/multerConstant");
+const { removeOldImage, removeImage } = require("../../utils/multerConstant");
 const path = require('path');
 const fs = require('fs');
 const basePath = path.join(__dirname, '..', '..', 'public', 'uploads');
@@ -119,10 +119,28 @@ const updatePortfolioField = async (req, res) => {
     res.status(500).json({ error: 'Error updating the portfolio.' });
   }
 };
+const portfolioDelete = (req, res) => {
+  const paramsId = req.params.id;
+  Portfolio.findByIdAndDelete(paramsId)
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({ message: 'Portfolio item not found' });
+      }
+
+      const oldImageFilename = result.featuredimage;
+      removeImage(oldImageFilename);
+      return res.status(200).json({ status: 'success' });
+    })
+    .catch((err) => {
+      console.error('Error deleting portfolio item:', err);
+      return res.status(500).json({ message: 'An error occurred while deleting the portfolio item' });
+    });
+}
 
 module.exports = {
   portfolioCreate,
   fetchDataPortfolio,
   portfolioUpdate,
-  updatePortfolioField
+  updatePortfolioField,
+  portfolioDelete
 };

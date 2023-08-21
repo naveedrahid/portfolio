@@ -32,32 +32,78 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <form id="addPortfolioForm" enctype="multipart/form-data">
-            <div class="form-group">
-              <input type="text" class="form-control" name="add_title" placeholder="Add Title">
-            </div>
-            <div class="form-group">
-              <textarea name="add_desc" width="100%" rows="10">Add Description</textarea>
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Select Status</label>
-              <select class="form-control" name="select_status">
-                <option>Active</option>
-                <option>deActive</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="exampleFormControlFile1">Add Image</label>
-              <input type="file" name="featuredimage" id="featuredimage">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
+          <input type="hidden" name="add_id" id="add_id" value="">
+          <div class="form-group">
+            <input type="text" class="form-control" id="add_title" name="add_title" placeholder="Add Title">
+          </div>
+          <div class="form-group">
+            <textarea name="add_desc" id="add_desc" width="100%" rows="10">Add Description</textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Select Status</label>
+            <select class="form-control" name="select_status" id="select_status">
+              <option>Active</option>
+              <option>deActive</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlFile1">Add Image</label>
+            <input type="file" name="featuredimage" id="featuredimage">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
         </form>
       </div>
     </div>
   </div>
 </div>
+<!-- Add this code in your HTML for modal -->
+
+<div class="modal fade" id="editPortfolio" tabindex="-1" role="dialog" aria-labelledby="editPortfolioLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPortfolioLabel">Edit Portfolio Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="editPortfolioForm" enctype="multipart/form-data" action="/portfolio/ITEM_ID/update" method="POST">
+        <input type="hidden" name="old_image_filename" id="old_image_filename" value="">
+        <div class="modal-body">
+          <input type="hidden" name="edit_id" id="edit_id" value="">
+          <div class="form-group">
+            <input type="text" class="form-control" name="edit_title" id="edit_title" placeholder="Edit Title">
+          </div>
+          <div class="form-group">
+            <textarea name="edit_desc" id="edit_desc" class="form-control" rows="10" placeholder="Edit Description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="edit_status">Edit Status</label>
+            <select class="form-control" name="edit_status" id="edit_status">
+              <option value="Active">Active</option>
+              <option value="Deactive">Deactive</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlFile1">Add Image</label>
+            <input type="file" name="featuredimage" id="featuredimage">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
 
 <!-- Bootstrap core JavaScript-->
 <script src="js/jquery.min.js"></script>
@@ -73,11 +119,11 @@
 <script src="js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="js/Chart.min.js"></script>
+<!-- <script src="js/Chart.min.js"></script> -->
 
 <!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
+<!-- <script src="js/demo/chart-area-demo.js"></script>
+<script src="js/demo/chart-pie-demo.js"></script> -->
 
 </body>
 

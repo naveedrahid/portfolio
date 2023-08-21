@@ -51,17 +51,13 @@ $(document).ready(function () {
             ${statusBtnText}
           </button>
         </td>
-        <td>
-          Delete
-          <a href="#" class="btn btn-danger btn-circle float-right">
-            <i class="fas fa-trash"></i>
-          </a>
-        </td>
-        <td>
-          Edit
-          <a href="#" class="btn btn-info btn-circle float-right">
-            <i class="fas fa-pencil-alt"></i>
-          </a>
+        <td class="text-center">
+        <button class="btn btn-danger btn-circle deleteButton" data-item-id="${portfolio._id}">
+          <i class="fas fa-trash"></i>
+        </button>
+        <button class="btn btn-info btn-circle editButton" data-toggle="modal" data-target="#editPortfolio" data-id="${portfolio._id}">
+          <i class="fas fa-pencil-alt"></i>
+        </button>
         </td>
       </tr>
     `;
@@ -87,14 +83,73 @@ $(document).ready(function () {
       .then((data) => {
         console.log(data);
         $('#addPortfolio').modal('hide');
-        // Append the new portfolio data to the table
         appendPortfolioRow(data);
       })
       .catch((error) => {
         console.error('Error:', error);
-        // Handle the error (if needed)
       });
   });
-
-  // Rest of your code...
 });
+$(document).ready(function () {
+  $('.deleteButton').on('click', function () {
+    const deleteButton = $(this);
+    const itemId = deleteButton.data('item-id');
+    Swal.fire({
+      title: 'Are You Sure Want to Delete This?',
+      showDenyButton: true,
+      confirmButtonText: 'Update',
+      denyButtonText: 'No Update',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: `/portfolio/delete/${itemId}`,
+          type: 'DELETE',
+          success: function (data) {
+            console.log('Record deleted, image removed:', data);
+            if (data.status === 'success') {
+              deleteButton.closest('tr').remove();
+            }
+            $('#messageDiv').text('Record deleted successfully').addClass('bg-success py-5 my-5');
+            setTimeout(() => {
+              $('#messageDiv').remove();
+            }, 3000);
+          },
+          error: function (xhr, status, error) {
+            console.error('Error deleting record and removing image:', error);
+          },
+        });
+      }
+    }).catch((err) => {
+      console.error('Error showing confirmation dialog:', err);
+    });
+  });
+});
+
+
+$(document).ready(function () {
+  $('.editButton').on('click', function () {
+    const editButton = $(this);
+    const itemId = editButton.data('id');
+
+    // Fetch data using AJAX and populate the modal
+    $.ajax({
+      type: 'GET',
+      url: `/portfolio/${itemId}`,
+      success: function (data) {
+        $('#edit_id').val(data._id);
+        $('#edit_title').val(data.title);
+        $('#edit_desc').val(data.description);
+        $('#edit_status').val(data.status ? 'Active' : 'Deactive');
+        $('#old_image_filename').val(data.featuredimage); // Store old image filename
+
+        // Open the modal
+        $('#editPortfolio').modal('show');
+      },
+      error: function (xhr, status, error) {
+        console.error('Error fetching portfolio item:', error);
+      },
+    });
+  });
+});
+
+
